@@ -1,47 +1,93 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
-  SafeAreaView,
-  StyleProp,
+  Alert,
+  Platform,
   StyleSheet,
   Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
   View,
-  ViewStyle,
+  SafeAreaView,
+  Pressable,
 } from 'react-native';
 
-function App(): JSX.Element {
-  return (
-    <View>
-      <View
-        style={{
-          height: '15%',
-          backgroundColor: 'powderblue',
-        }}
-      />
-      <View
-        style={{
-          width: '70%',
-          height: '35%',
-          backgroundColor: 'skyblue',
-        }}
-      />
-      <View
-        style={{
-          width: '33%',
-          height: '50%',
-          backgroundColor: 'steelblue',
-        }}
-      />
-    </View>
-  );
+export default class Touchables extends Component {
+  _onPressButton() {
+    Alert.alert('You tapped the button!');
+  }
+
+  _onLongPressButton() {
+    Alert.alert('You long-pressed the button!');
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>TouchableHighlight</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableOpacity onPress={this._onPressButton}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>TouchableOpacity</Text>
+          </View>
+        </TouchableOpacity>
+        <Pressable
+          onPressIn={() => console.log('눌림')}
+          onPressOut={() => console.log('떼짐')}
+          pressRetentionOffset={100}
+          hitSlop={50}>
+          <Text>Hell</Text>
+        </Pressable>
+        <TouchableNativeFeedback
+          onPress={this._onPressButton}
+          background={
+            Platform.OS === 'android'
+              ? TouchableNativeFeedback.SelectableBackground()
+              : undefined
+          }>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>
+              TouchableNativeFeedback{' '}
+              {Platform.OS !== 'android' ? '(Android only)' : ''}
+            </Text>
+          </View>
+        </TouchableNativeFeedback>
+        <TouchableWithoutFeedback onPress={this._onPressButton}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableHighlight
+          onPress={this._onPressButton}
+          onLongPress={this._onLongPressButton}
+          underlayColor="white">
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Touchable with Long Press</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    justifyContent: 'center',
+    paddingTop: 60,
     alignItems: 'center',
-    height: '100%',
+  },
+  button: {
+    marginBottom: 30,
+    width: 260,
+    alignItems: 'center',
+    backgroundColor: '#2196F3',
+  },
+  buttonText: {
+    textAlign: 'center',
+    padding: 20,
+    color: 'white',
   },
 });
-
-export default App;
