@@ -1,6 +1,6 @@
 # React Native 공부
 
-React Native 공식 홈페이지 보며 공부
+[React Native 공식 홈페이지](https://reactnative.dev/, "React Native") 보며 공부
 
 ## UI
 
@@ -9,7 +9,7 @@ React Native 공식 홈페이지 보며 공부
 
 ### 적용 ❌
 
-```
+```javascript
 <View>
   <View style={{flex: 1, backgroundColor: 'powderblue'}} />
   <View style={{flex: 2, backgroundColor: 'skyblue'}} />
@@ -19,7 +19,7 @@ React Native 공식 홈페이지 보며 공부
 
 ### 적용 ⭕️
 
-```
+```javascript
 <View style={{flex: 1}}>
   <View style={{flex: 1, backgroundColor: 'powderblue'}} />
   <View style={{flex: 2, backgroundColor: 'skyblue'}} />
@@ -29,7 +29,7 @@ React Native 공식 홈페이지 보며 공부
 
 - 정적인 이미지(Static Image)를 넣기 위해서는 require를 써야한다. 이때 require 안에 변수를 넣지 못한다.
 
-```
+```javascript
 // GOOD
 <Image source={require('./my-icon.png')} />;
 
@@ -46,7 +46,7 @@ const icon = this.props.active
 
 - uri를 network 이미지 혹은 encoded된 이미지를 가져올 수도 있다. 이 또한 크기를 지정해주어야한다.
 
-```
+```javascript
 // GOOD
 <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 400, height: 400}} />
@@ -69,7 +69,7 @@ const icon = this.props.active
 
 - 이미지를 이용한 배경을 사용하고 싶다면 ImageBackground를 사용하면 된다.
 
-```
+```javascript
 return (
   <ImageBackground source={...} style={{width: '100%', height: '100%'}}>
     <Text>Inside</Text>
